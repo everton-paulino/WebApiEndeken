@@ -31,12 +31,11 @@ namespace WebApiEndeken
         {
 
 
-
             services.Configure<DatabaseConfig>(Configuration.GetSection(nameof(DatabaseConfig)));
             services.AddSingleton<IDatabaseConfig>(sp => sp.GetRequiredService<IOptions<DatabaseConfig>>().Value);
 
-            services.AddSingleton<IProdutoRepository, ProdutoRepository>();
-           
+            services.AddSingleton<IProdutoRepository, ProdutoRepository>();           
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

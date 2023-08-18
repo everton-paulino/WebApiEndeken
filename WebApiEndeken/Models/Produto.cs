@@ -8,15 +8,12 @@ namespace WebApiEndeken.Models
 {
     [BsonIgnoreExtraElements]
     public class Produto
-    {
-        
-
+    {        
         public Produto()
         {
             Id = Guid.NewGuid().ToString();
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
-
         }
 
         public string Id{ get; set; }

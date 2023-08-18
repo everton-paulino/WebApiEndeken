@@ -7,7 +7,7 @@ namespace WebApiEndeken.Data.Configuration
 {
     public interface IDatabaseConfig
     {
-        string DataBaseName { get; set; }
-        string ConnecionString { get; set; }
+        string DatabaseName { get; set; }
+        string ConnectionString { get; set; }
     }
 }

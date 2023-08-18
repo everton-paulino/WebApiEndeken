@@ -9,8 +9,9 @@ namespace WebApiEndeken.Data
     public interface IProdutoRepository
     {
         void Post(Produto produto);
-        void Update(string id, Produto produtoUpdate);
-        IEnumerable<Produto> Get();
-        Produto Get(string id);
+        void Update(Produto produtoUpdate);
+        IEnumerable<Produto> GetAll();
+        Produto GetToId(string id);
+        void Remover(string id);
     }
 }

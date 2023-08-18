@@ -26,17 +26,17 @@ namespace WebApiEndeken.Controllers
 
         // GET: api/<ValuesController>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
-            var produtos= _produtoRepository.Get();
+            var produtos= _produtoRepository.GetAll();
             return Ok(produtos);
         }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public IActionResult GetToId(string id)
         {
-            var produto = _produtoRepository.Get();
+            var produto = _produtoRepository.GetAll();
 
             if (produto == null)
                 return NotFound();
@@ -64,14 +64,37 @@ namespace WebApiEndeken.Controllers
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(string id, [FromBody] Produto updateproduto)
         {
+
+            var produtoUpdate = _produtoRepository.GetToId(id);           
+
+            if (produtoUpdate == null)
+                return NotFound();
+
+            var uproduto = new Produto();
+            uproduto.UpdatedAt = DateTime.Now;
+            uproduto.Name = produtoUpdate.Name;
+            uproduto.Description = produtoUpdate.Description;
+            uproduto.Price = produtoUpdate.Price;
+
+            _produtoRepository.Update(produtoUpdate);
+
+            return Ok(updateproduto);
         }
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(string id)
         {
+            var produtoUpdate = _produtoRepository.GetToId(id);
+
+            if (produtoUpdate == null)
+                return NotFound();
+
+            _produtoRepository.Remover(id);
+
+            return NoContent();
         }
     }
 }

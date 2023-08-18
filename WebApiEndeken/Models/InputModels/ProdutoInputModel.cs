@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 namespace WebApiEndeken.Models.InputModels
 {
     public class ProdutoInputModel   
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public double Price { get; set; }
+    {      
 
     }
 }

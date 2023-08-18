@@ -14,16 +14,17 @@ namespace WebApiEndeken.Data.Repositories
 
         public ProdutoRepository(IDatabaseConfig databaseConfig)            
         {
-            var client = new MongoClient(databaseConfig.ConnecionString);
-            var database = client.GetDatabase(databaseConfig.DataBaseName);
+            var client = new MongoClient(databaseConfig.ConnectionString;
+            var database = client.GetDatabase(databaseConfig.DatabaseName);
 
-            _produto = database.GetCollection<Produto>("produtos");
+            _produto = database.GetCollection<Produto>("produto");
         }
 
 
         public IEnumerable<Produto> Get()
         {
-            return _produto.Find(produto => true).ToList();            
+            return _produto.Find(produto => true).ToList();
+            
         }
 
         public Produto Get(string id)
@@ -31,15 +32,31 @@ namespace WebApiEndeken.Data.Repositories
             return _produto.Find(produto => produto.Id ==id).FirstOrDefault();
         }
 
+        public IEnumerable<Produto> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Produto GetToId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Post(Produto produto)
         {
             _produto.InsertOne(produto);            
         }
 
-        public void Update(string id, Produto produtoUpdate)
+        public void Remover(string id)
         {
 
-            _produto.ReplaceOne(produto => produto.Id == id, produtoUpdate);
+            _produto.DeleteOne(t => t.Id == id);
+        }
+
+        public void Update( Produto produtoUpdate)
+        {
+
+            _produto.ReplaceOne(produto => produto.Id == produtoUpdate.Id, produtoUpdate);
         }
     }
 }
