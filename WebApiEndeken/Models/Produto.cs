@@ -16,6 +16,7 @@ namespace WebApiEndeken.Models
             Id = Guid.NewGuid().ToString();
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
+
         }
 
         public string Id{ get; set; }

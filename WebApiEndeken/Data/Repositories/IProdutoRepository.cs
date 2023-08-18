@@ -11,6 +11,6 @@ namespace WebApiEndeken.Data
         void Post(Produto produto);
         void Update(string id, Produto produtoUpdate);
         IEnumerable<Produto> Get();
-        Produto Get(string Id);
+        Produto Get(string id);
     }
 }

@@ -38,43 +38,6 @@ namespace WebApiEndeken
             services.AddSingleton<IProdutoRepository, ProdutoRepository>();
            
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

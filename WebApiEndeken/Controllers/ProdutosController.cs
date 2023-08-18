@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApiEndeken.Data;
+using WebApiEndeken.Models;
+using WebApiEndeken.Models.InputModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,24 +18,48 @@ namespace WebApiEndeken.Controllers
 
         private IProdutoRepository _produtoRepository;
 
+
+        public ProdutosController(IProdutoRepository produtoRepository)
+        {
+            _produtoRepository = produtoRepository;
+        }
+
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var produtos= _produtoRepository.Get();
+            return Ok(produtos);
         }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(string id)
         {
-            return "value";
+            var produto = _produtoRepository.Get();
+
+            if (produto == null)
+                return NotFound();
+
+            return Ok(produto);
+
         }
 
         // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Produto newProduto)        
         {
+            var addProduto = new Produto();
+            addProduto.Name = newProduto.Name;
+            addProduto.Description = newProduto.Description;
+
+            addProduto.Price = newProduto.Price;
+
+            _produtoRepository.Post(addProduto);
+
+            return Ok(addProduto);  
+
+
         }
 
         // PUT api/<ValuesController>/5

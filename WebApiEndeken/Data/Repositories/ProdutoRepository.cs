@@ -3,31 +3,43 @@ using WebApiEndeken.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Driver;
+using WebApiEndeken.Data.Configuration;
 
 namespace WebApiEndeken.Data.Repositories
 {
     public class ProdutoRepository : IProdutoRepository
     {
+        private readonly IMongoCollection<Produto> _produto;
+
+        public ProdutoRepository(IDatabaseConfig databaseConfig)            
+        {
+            var client = new MongoClient(databaseConfig.ConnecionString);
+            var database = client.GetDatabase(databaseConfig.DataBaseName);
+
+            _produto = database.GetCollection<Produto>("produtos");
+        }
 
 
         public IEnumerable<Produto> Get()
         {
-            throw new System.NotImplementedException();
+            return _produto.Find(produto => true).ToList();            
         }
 
-        public Produto Get(string Id)
+        public Produto Get(string id)
         {
-            throw new System.NotImplementedException();
+            return _produto.Find(produto => produto.Id ==id).FirstOrDefault();
         }
 
         public void Post(Produto produto)
         {
-            throw new System.NotImplementedException();
+            _produto.InsertOne(produto);            
         }
 
         public void Update(string id, Produto produtoUpdate)
         {
-            throw new System.NotImplementedException();
+
+            _produto.ReplaceOne(produto => produto.Id == id, produtoUpdate);
         }
     }
 }
