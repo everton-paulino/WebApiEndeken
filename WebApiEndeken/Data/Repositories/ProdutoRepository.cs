@@ -21,25 +21,18 @@ namespace WebApiEndeken.Data.Repositories
         }
 
 
-        public IEnumerable<Produto> Get()
+        public IEnumerable<Produto> GetAll()
+            
         {
             return _produto.Find(produto => true).ToList();
             
         }
-
-        public Produto Get(string id)
-        {
-            return _produto.Find(produto => produto.Id ==id).FirstOrDefault();
-        }
-
-        public IEnumerable<Produto> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public Produto GetToId(string id)
         {
-            throw new NotImplementedException();
+            return _produto.Find(produto => produto.Id == id).FirstOrDefault();
+
         }
 
         public void Post(Produto produto)
