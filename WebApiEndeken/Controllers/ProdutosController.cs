@@ -49,6 +49,7 @@ namespace WebApiEndeken.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Produto newProduto)        
         {
+            
             var addProduto = new Produto();
             addProduto.Name = newProduto.Name;
             addProduto.Description = newProduto.Description;

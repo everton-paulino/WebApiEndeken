@@ -42,6 +42,9 @@ namespace WebApiEndeken
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiEndeken", Version = "v1" });
             });
+
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

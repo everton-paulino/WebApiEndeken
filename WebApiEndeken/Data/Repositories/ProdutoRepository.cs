@@ -14,7 +14,7 @@ namespace WebApiEndeken.Data.Repositories
 
         public ProdutoRepository(IDatabaseConfig databaseConfig)            
         {
-            var client = new MongoClient(databaseConfig.ConnectionString;
+            var client = new MongoClient(databaseConfig.ConnectionString);
             var database = client.GetDatabase(databaseConfig.DatabaseName);
 
             _produto = database.GetCollection<Produto>("produto");
